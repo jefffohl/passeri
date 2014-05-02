@@ -11,11 +11,13 @@
   <script type="text/javascript" src="/static/<%= grunt.config.get('pkg.name') %>.js"></script>
 </head>
 <body ng-controller="AppCtrl">
-  <div class="jumbotron"><h1>Passeri</h1></div>
-  <div ng-include="'header.tpl.html'"></div>
-  <div ng-include="'notifications.tpl.html'" class="notifications container" ng-show="notifications.getCurrent().length"></div>
-  <div ng-view class="container"></div>
-  <footer class="footer container">
-  </footer>
+  <div class="container-fluid">
+    <!--<div ng-include="'header.tpl.html'"></div>
+    <div ng-include="'notifications.tpl.html'" class="notifications container" ng-show="notifications.getCurrent().length"></div>-->
+    <div class="jumbotron"><h1>{{title}}</h1></div>
+    <div ng-view class="container-fluid">
+
+    </div>
+  </div>
 </body>
 </html>
