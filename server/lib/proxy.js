@@ -1,5 +1,5 @@
 var url = require('url');
-var config = require('../config.js');
+var config = require('../server_config.js');
 var cookie = require('cookie');
 var http = require('http');
 

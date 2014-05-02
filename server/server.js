@@ -1,17 +1,18 @@
+
 var fs = require('fs');
 var http = require('http');
 var logFile = fs.createWriteStream('./express.log', {flags: 'a'}); //use {flags: 'w'} to open in write mode
 var express = require('express');
-var config = require('./config.js');
-// var proxy = require('./lib/proxy');
+var config = require('./server_config.js');
+var proxy = require('./lib/proxy');
 require('express-namespace');
 var app = express();
 var server = http.createServer(app);
 
-app.namespace('/twitter/:*', function() {
-  // app.all('/', proxy());
-});
 require('./lib/routes/static').addRoutes(app, config); // Handles the static assets, such as images, css, etc.
+app.namespace('/twitter/:resource*', function() {
+  app.all('/', proxy());
+});
 
 app.use(express.logger({stream: logFile})); // Log to express.log file
 app.use(express.bodyParser());

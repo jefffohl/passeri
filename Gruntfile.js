@@ -50,7 +50,7 @@ module.exports = function (grunt) {
         files: [
           { dest: '<%= distdir %>/client', src : '**', expand: true, cwd: 'client/src/assets/'},
           { dest: '<%= distdir %>/server', cwd: 'server/', src: 'server.js', expand: true},
-          { dest: '<%= distdir %>/server', cwd: 'server/', src: 'config.js', expand: true},
+          { dest: '<%= distdir %>/server', cwd: 'server/', src: 'server_config.js', expand: true},
           { dest: '<%= distdir %>/server/lib', cwd: 'server/lib/', src: '**', expand: true}
         ]
       },
