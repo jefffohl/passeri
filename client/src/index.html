@@ -2,14 +2,16 @@
 <html lang="en" ng-app="app">
 <head>
   <link rel="stylesheet" type="text/css" href="/static/<%= grunt.config.get('pkg.name') %>.css"/>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="text/javascript" src="/static/jquery.js"></script>
   <script type="text/javascript" src="/static/angular.js"></script>
   <script type="text/javascript" src="/static/bootstrap.js"></script>
   <script type="text/javascript" src="/static/<%= grunt.config.get('pkg.name') %>.js"></script>
-  <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon" />
 </head>
 <body ng-controller="AppCtrl">
+  <div class="jumbotron"><h1>Passeri</h1></div>
   <div ng-include="'header.tpl.html'"></div>
   <div ng-include="'notifications.tpl.html'" class="notifications container" ng-show="notifications.getCurrent().length"></div>
   <div ng-view class="container"></div>

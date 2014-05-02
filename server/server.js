@@ -11,6 +11,7 @@ require('./lib/routes/static').addRoutes(app, config); // Handles the static ass
 
 app.use(express.logger({stream: logFile})); // Log to express.log file
 app.use(express.bodyParser());
+require('./lib/routes/appFile').addRoutes(app, config);
 
 // A standard error handler - it picks up any left over errors and returns a nicely formatted server 500 error
 app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));

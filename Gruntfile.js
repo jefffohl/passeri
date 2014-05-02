@@ -5,15 +5,15 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-recess');
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-ngmin');
 
   // Default task.
   grunt.registerTask('default', ['jshint:client','build']);
   grunt.registerTask('server', ['jshint:server']);
-  grunt.registerTask('build', ['clean','html2js','concat','recess:build','copy:build']);
-  grunt.registerTask('release', ['server','clean','html2js','jshint','concat','recess:min','ngmin','uglify','clean:release','copy']);
+  grunt.registerTask('build', ['clean','html2js','concat','less:build','copy:build']);
+  grunt.registerTask('release', ['server','clean','html2js','jshint','concat','less:min','ngmin','uglify','clean:release','copy']);
 
   // Print a timestamp (useful for when watching)
   grunt.registerTask('timestamp', function() {
@@ -37,7 +37,7 @@ module.exports = function (grunt) {
         app: ['client/src/app/**/*.tpl.html'],
         common: ['client/src/common/**/*.tpl.html']
       },
-      less: ['client/src/less/stylesheet.less'], // recess:build doesn't accept ** in its file patterns
+      less: ['client/bower_components/bootstrap/less/bootstrap.less'],
       lessWatch: ['client/src/less/**/*.less']
     },
     clean: {
@@ -107,11 +107,10 @@ module.exports = function (grunt) {
         dest: '<%= distdir %>/client/jquery.js'
       }
     },
-    recess: {
+    less: {
       build: {
         files: {
-          '<%= distdir %>/client/<%= pkg.name %>.css':
-          ['<%= src.less %>'] },
+          '<%= distdir %>/client/<%= pkg.name %>.css':['<%= src.less %>'] },
         options: {
           compile: true
         }
