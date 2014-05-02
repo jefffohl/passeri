@@ -17,3 +17,4 @@ pids
 logs
 results
 npm-debug.log
+server_config.js
