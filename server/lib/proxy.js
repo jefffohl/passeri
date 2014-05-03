@@ -2,6 +2,8 @@ var url = require('url');
 var config = require('../server_config.js');
 var cookie = require('cookie');
 var http = require('http');
+var util = require('util');
+var twitter = require('twitter');
 
 // For debugging with Charles proxy:
 /*
@@ -19,7 +21,7 @@ module.exports = function() {
 
   // adds the proper hostname, protocol, and pathname to the request, taken from the basePath, above.
   // @Returns a parsed Url object
-
+  /*
   var mapUrl = module.exports.mapUrl = function(reqUrlString) {
     var basePath = url.parse(config.twitter.apiUrl);
     var reqUrl = url.parse(reqUrlString, true);
@@ -67,6 +69,25 @@ module.exports = function() {
       console.log('ERROR: ', error.stack);
       res.json(error);
     }
+  };
+  */
+
+  var proxy = function(req, res, next) {
+    // res.send(req.query.keyword);
+    var response = "";
+    var twit = new twitter({
+      consumer_key: config.twitter.key,
+      consumer_secret: config.twitter.secret,
+      access_token_key: config.twitter.tokenkey,
+      access_token_secret: config.twitter.tokensecret
+    });
+    twit.stream('filter', {track:req.query.keyword}, function(stream) {
+      stream.on('data', function(data) {
+          response = response + util.inspect(data.text);
+      });
+      // Disconnect stream after five seconds
+      setTimeout(function(){stream.destroy;res.send(response);}, 10000);
+    });
   };
 
   return proxy;

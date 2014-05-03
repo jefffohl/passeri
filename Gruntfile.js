@@ -38,7 +38,6 @@ module.exports = function (grunt) {
         common: ['client/src/common/**/*.tpl.html']
       },
       less: ['client/src/less/stylesheet.less'],
-      // less: ['client/bower_components/bootstrap/less/bootstrap.less'],
       lessWatch: ['client/src/less/**/*.less']
     },
     clean: {
@@ -96,7 +95,8 @@ module.exports = function (grunt) {
       },
       angular: {
         src:[ 'client/bower_components/angular/angular.js',
-              'client/bower_components/angular-route/angular-route.js'
+              'client/bower_components/angular-route/angular-route.js',
+              'client/bower_components/angular-socket-io/socket.js'
             ],
         dest: '<%= distdir %>/client/angular.js'
       },

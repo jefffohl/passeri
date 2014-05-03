@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute']);
+angular.module('app', ['ngRoute','btford.socket-io']);
 
 
 angular.module('app').config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
@@ -13,9 +13,22 @@ angular.module('app').run([function() {
 
 }]);
 
-angular.module('app').controller('AppCtrl', ['$scope', function($scope) {
+angular.module('app').factory('socketio', function (socketFactory) {
+  return socketFactory();
+});
+
+angular.module('app').controller('AppCtrl', ['$scope', '$http', function($scope,$http) {
   // this where we interface with the view
   // main controller
   $scope.title = "Passeri";
+
+  $scope.keyword = "";
+  $scope.stream = "";
+
+  $scope.listen = function() {
+    var promise = $http.get('/twitter',{params: {"keyword":$scope.keyword}}).then(function(output){
+      $scope.stream = output.data;
+    });
+  };
 
 }]);

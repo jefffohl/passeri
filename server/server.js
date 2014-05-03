@@ -10,7 +10,7 @@ var app = express();
 var server = http.createServer(app);
 
 require('./lib/routes/static').addRoutes(app, config); // Handles the static assets, such as images, css, etc.
-app.namespace('/twitter/:resource*', function() {
+app.namespace('/twitter', function() {
   app.all('/', proxy());
 });
 
